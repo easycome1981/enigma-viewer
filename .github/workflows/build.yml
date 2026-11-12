@@ -32,10 +32,10 @@ jobs:
           pip install --upgrade cython virtualenv
           pip install buildozer
 
-      - name: Pre-download Android SDK build-tools via Buildozer
+      - name: Force Android SDK update and tools download
         run: |
-          # Această comandă pregătește mediul și descarcă dependențele SDK înainte de build-ul final
-          buildozer android update || true
+          # Această comandă forțează Buildozer să descarce complet SDK-ul, NDK-ul și Build-Tools (inclusiv aidl)
+          yes | buildozer android update || true
 
       - name: Build APK with Buildozer
         run: |
