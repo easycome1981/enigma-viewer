@@ -33,6 +33,13 @@ jobs:
           python -m pip install --upgrade cython virtualenv
           python -m pip install buildozer
 
+      - name: Bypass Android SDK Licenses Prompt
+        run: |
+          mkdir -p /home/runner/.buildozer/android/platform/android-sdk/licenses
+          echo "24333f8a43b682ff23c535fb45d69382af436611" > /home/runner/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
+          echo "d56f5187479451eabf01fb78af6dfcb131a648ab" >> /home/runner/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
+          echo "84831b9409646a918e30573bab4c9c91346d8abd" >> /home/runner/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
+
       - name: Build APK with Buildozer
         run: |
           buildozer -v android debug
