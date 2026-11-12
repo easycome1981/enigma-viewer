@@ -12,14 +12,13 @@ package.domain = org.enigma
 # (str) Source files where the let's go
 source.dir = .
 
-# (list) Source files to include (let it empty to include all the files)
+# (list) Source files to include
 source.exts = py,png,jpg,kv,atlas
 
 # (list) Application version
 version = 0.1
 
 # (list) Application requirements
-# comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy,requests,pillow
 
 # (str) Supported orientations
@@ -28,7 +27,7 @@ orientation = landscape
 # (list) Permissions
 android.permissions = INTERNET,ACCESS_NETWORK_STATE
 
-# (int) Target Android API, should be as high as possible.
+# (int) Target Android API
 android.api = 33
 
 # (int) Minimum API your APK will support
@@ -43,5 +42,8 @@ android.ndk = 25b
 # (list) Android architectures to build for
 android.archs = armeabi-v7a
 
-# (bool) Indicate whether the application should be fullscreen or not
+# (bool) Fullscreen
 fullscreen = 1
+
+# (int) Log level (2 = detailed debug to see any hidden error)
+log_level = 2
