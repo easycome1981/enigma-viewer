@@ -1,4 +1,4 @@
-name: Build APK
+name: Build APK Nativ
 
 on:
   workflow_dispatch:
@@ -17,13 +17,27 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        with:
-          workdir: .
-          buildozer_version: master
+      - name: Install system dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-python3 \
+            git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config \
+            zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev \
+            libltdl-dev libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386
 
-      - name: Upload APK
+      - name: Install Buildozer and Cython
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade cython virtualenv
+          pip install buildozer
+
+      - name: Build APK with Buildozer
+        run: |
+          buildozer -v android debug
+
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: package
